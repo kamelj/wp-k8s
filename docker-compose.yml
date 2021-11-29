@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - ./db/data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress_test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+  wordpress:
+    build: .
+    #image: wordpress:latest
+    depends_on:
+      - db
+    volumes:
+      - ./wp/wp-content:/var/www/html/wp-content
+    ports:
+      - "88:80"
+    restart: always
