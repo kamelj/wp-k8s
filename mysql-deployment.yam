@@ -5,6 +5,7 @@ metadata:
   labels:
     app: wordpress
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: wordpress
@@ -36,3 +37,7 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+      resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
